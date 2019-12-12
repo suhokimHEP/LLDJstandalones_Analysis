@@ -173,7 +173,7 @@ void taggerSlim(Double_t c_ip, Double_t c_ta, TString year, TString sample/*, In
           for (int j=0; j<TA->size(); j++)
 	    {
 	      if(Alpha->at(j)<=c_al && IP->at(j)>=c_ip && TA->at(j)>=c_ta && Alpha->at(j)>=0.0 && ZPt->at(i)>=c_Zpt ) tags = tags + 1;
-	      if(Alpha->at(j)<=c_al && IP->at(j)>=c_ip && TA->at(j)>=c_ta && Alpha->at(j)>=0.0 && ZPt->at(i) < c_Zpt ) ntag_low_zpt = ntag_low_zpt+1;
+	      if(Alpha->at(j)<=c_al && IP->at(j)>=c_ip && TA->at(j)>=c_ta && Alpha->at(j)>=0.0 && ZPt->at(i)<=c_Zpt ) ntag_low_zpt = ntag_low_zpt+1;
 	    }
 	  double weight          = MCSF*base_weight->at(i);//xsec weight;
 	  double weight_eleSF    = weight*ele_weight->at(i);//xsec weight*eleSF;
