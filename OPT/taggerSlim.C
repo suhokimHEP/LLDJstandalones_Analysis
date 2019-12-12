@@ -46,13 +46,13 @@ void taggerSlim(Double_t c_ip, Double_t c_ta, TString year, TString sample/*, In
   // TTJets_amx SF(2018): 1.12778
  
   if (sample.Contains("HToSSTobbbb") ) MCSF *= 117396.2/16226.2; // Extend to Full Lumi
-  if (year == "2016" ) MCSF *= 1./0.8546545; // Remove overallDY SF 2016
-  if (year == "2017" ) MCSF *= 1./0.780398; // Remove overallDY SF 2017
-  if (year == "2018" ) MCSF *= 1./.7323; // Remove overallDY SF 2018
-  if (year == "2018" && sample.Contains("TTJets") ) MCSF *= 1.12778; // apply TTJets SF 2018
-  if (year == "2016" && sample.Contains("DYJetsToLL") ) MCSF *= 0.8546545;    // Re-apply DY SF 2016
-  if (year == "2017" && sample.Contains("DYJetsToLL") ) MCSF *= 0.780398;     // Re-apply DY SF 2017
-  if (year == "2018" && sample.Contains("DYJetsToLL") ) MCSF *= .7323;        // Re-apply DY SF 2018
+//  if (year == "2016" ) MCSF *= 1./0.8546545; // Remove overallDY SF 2016
+//  if (year == "2017" ) MCSF *= 1./0.780398; // Remove overallDY SF 2017
+//  if (year == "2018" ) MCSF *= 1./.7323; // Remove overallDY SF 2018
+//  if (year == "2018" && sample.Contains("TTJets") ) MCSF *= 1.12778; // apply TTJets SF 2018
+//  if (year == "2016" && sample.Contains("DYJetsToLL") ) MCSF *= 0.8546545;    // Re-apply DY SF 2016
+//  if (year == "2017" && sample.Contains("DYJetsToLL") ) MCSF *= 0.780398;     // Re-apply DY SF 2017
+//  if (year == "2018" && sample.Contains("DYJetsToLL") ) MCSF *= .7323;        // Re-apply DY SF 2018
 
   cout <<"samples: "<<sample <<"   MCSF: "<<MCSF <<endl;
 
