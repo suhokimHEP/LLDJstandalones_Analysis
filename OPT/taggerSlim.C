@@ -62,9 +62,9 @@ void taggerSlim(Double_t c_ip, Double_t c_ta, TString year, TString sample/*, In
   h_ntags->Sumw2();
 
   TString Path;
-  if     (year=="2016") Path = "root://cmsxrootd.fnal.gov///store/user/ddiaz/OPT/2016/";
-  else if(year=="2017") Path = "root://cmsxrootd.fnal.gov///store/user/ddiaz/OPT/2017/";
-  else if(year=="2018") Path = "root://cmsxrootd.fnal.gov///store/user/ddiaz/OPT/2018/";
+  if     (year=="2016") Path = "root://cmsxrootd.fnal.gov///store/group/lpchbb/LLDJntuples/topRWT/analyzed/PUWeights_Shifts_ZSF_OPT_2/";
+  else if(year=="2017") Path = "root://cmsxrootd.fnal.gov///store/group/lpchbb/LLDJntuples/2017lldj_NoJEC/analyzed/PUWeights_Shifts_OPT_2/";
+  else if(year=="2018") Path = "root://cmsxrootd.fnal.gov///store/group/lpchbb/LLDJntuples/2018_LLDJ/analyzed/PUWeights_Shifts_OPT_2/";
   else cout <<"Bad Year"<<endl;
 
   TString sampleName= sample;

@@ -56,19 +56,19 @@ samples_16=( \
  "TTtoLfromTbar_OPTtree.root"   \
  "WGToLNuG_OPTtree.root"   \
  "WJetsToLNu_OPTtree.root"   \
-## "WWTo2L2Nu_OPTtree.root"   \
-## "WWToLNuQQ_OPTtree.root"   \
+ "WWTo2L2Nu_OPTtree.root"   \
+ "WWToLNuQQ_OPTtree.root"   \
  "WW_OPTtree.root"   \
-## "WZTo1L3Nu_OPTtree.root"   \
-## "WZTo3LNu_OPTtree.root"   \
-## "WZToLNu2QorQQ2L_OPTtree.root"   \
+ "WZTo1L3Nu_OPTtree.root"   \
+ "WZTo3LNu_OPTtree.root"   \
+ "WZToLNu2QorQQ2L_OPTtree.root"   \
  "WZ_OPTtree.root"   \
  "ZGTo2LG_OPTtree.root"   \
  "ZH_HToBB_ZToLL_OPTtree.root"   \
-# "ZZTo2L2Nu_OPTtree.root"   \
-# "ZZTo2L2Q_OPTtree.root"   \
-# "ZZTo2Q2Nu_OPTtree.root"   \
-# "ZZTo4L_OPTtree.root"   \
+ "ZZTo2L2Nu_OPTtree.root"   \
+ "ZZTo2L2Q_OPTtree.root"   \
+ "ZZTo2Q2Nu_OPTtree.root"   \
+ "ZZTo4L_OPTtree.root"   \
  "ZZ_OPTtree.root"   \
  "ggZH_HToBB_ZToLL_OPTtree.root"   \
  "mad_DYJetsToLL_M-50_OPTtree.root"  \
@@ -88,7 +88,7 @@ samples_17=( \
  "ST_t-channel_top_4f_inclusiveDecays_OPTtree.root"   \
  "ST_tW_antitop_5f_NoFullyHadronicDecays_OPTtree.root"   \
  "ST_tW_top_5f_NoFullyHadronicDecays_OPTtree.root"   \
- "TTJets_amc_OPTtree.root"   \
+ "TTJets_OPTtree.root"   \
  "TTtoLL_OPTtree.root"   \
  "WGToLNuG_OPTtree.root"   \
  "WJetsToLNu_OPTtree.root"   \
@@ -108,6 +108,7 @@ samples_18=( \
  "QCD_HT2000toInf_OPTtree.root"   \
  "QCD_HT200to300_OPTtree.root"   \
  "QCD_HT300to500_OPTtree.root"   \
+ "QCD_HT500to700_OPTtree.root"   \
  "QCD_HT700to1000_OPTtree.root"   \
  "ST_s-channel_4f_leptonDecays_OPTtree.root"   \
  "ST_t-channel_antitop_4f_inclusiveDecays_OPTtree.root"   \
@@ -116,7 +117,7 @@ samples_18=( \
  "ST_tW_top_5f_NoFullyHadronicDecays_OPTtree.root"   \
  "TTJets_OPTtree.root"   \
  "TTtoLL_OPTtree.root"   \
- "TTtoLL_amc_OPTtree.root"   \
+ "TTtoLL_mad_OPTtree.root"   \
  "WGToLNuG_OPTtree.root"   \
  "WJetsToLNu_OPTtree.root"   \
  "WW_OPTtree.root"   \
