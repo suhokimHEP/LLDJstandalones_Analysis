@@ -60,7 +60,7 @@ int main(int argc, char** argv)
   //Require a valid TChain called <chain>
   //------------------------------------------
   SampleSplit* evt = new SampleSplit( chain );
-  //evt->fout_name = output_file;
+  evt->SampleName = input_list;
   //evt->fatjet_pt_trh = 250.0;
   //-----------------------------------------
   //Running main Loop for HH analysis

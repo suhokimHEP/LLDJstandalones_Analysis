@@ -25,7 +25,7 @@ class SampleSplit {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
-
+   TString         SampleName;
 // Fixed size dimensions of array or collections stored in the TTree if any.
 
    // Declaration of leaf types

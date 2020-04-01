@@ -1,5 +1,5 @@
 
-doSubmit=true
+doSubmit=false
 
 outDir="/eos/uscms/store/user/ddiaz/SignalSplitTest/"
 rm -r $outDir
@@ -14,12 +14,12 @@ mkdir -p err
 mkdir -p out
 mkdir -p log
 
-filesPerJob=5
+filesPerJob=1
 samples=( \
-  "2017_ggZH" \
-#  "2017_ZH" \
-#  "2018_ggZH" \
-#  "2018_ZH" \
+  "2017_4b_ggZH" \
+#  "2017_4b_ZH" \
+#  "2018_4b_ggZH" \
+#  "2018_4b_ZH" \
 )
 
 for sample in ${samples[@]}
@@ -27,7 +27,7 @@ do
   nlines=`cat inputLists/${sample}.list | wc -l`
   njobs1=$((nlines/filesPerJob))
   njobs2=$((nlines%filesPerJob))
-  if [ $njobs2 > 0 ]
+  if [ $njobs2 -gt 0 ]
   then
     echo adding one
     njobs=$((njobs1+1))
@@ -36,7 +36,7 @@ do
     njobs=$((njobs1))
   fi
   #echo $sample, $nlines
-  #echo number of submits, $njobs, $njobs1, $njobs2
+  echo number of submits, $njobs, $njobs1, $njobs2
   split -l $filesPerJob -d -a 2 --additional-suffix=.list inputLists/${sample}.list ${sample}"_"
   #split -l 5            -d -a 2 --additional-suffix=.list inputLists/2017_ggZH.list 2017_ggZH"_"
   for (( i=0; i<$njobs; i++ ))
