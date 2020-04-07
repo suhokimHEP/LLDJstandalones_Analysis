@@ -16,8 +16,8 @@
 #include <cstdlib> /* mkdir */
 #include <stdlib.h>     /* getenv */
 
-float targetdist = 2;	
-Float_t calculatectauEventWeight( float dist )
+float nomtargetdist = .5;	
+Float_t calculatectauEventWeight( float dist, float targetdist )
 {
  float weight, factor;
 if (targetdist<10 && 1 < targetdist) {
@@ -39,9 +39,9 @@ else  {
         }
  return weight;
  }
-void ctau_interpolation(TString sample) {
+void ctau_interpolation(string sample) {
    //Get old file, old tree and set top branch address
-   //TFile *oldfile;
+   gErrorIgnoreLevel = kBreak;
    std::vector<float> *llpvX=0;
    std::vector<float> *llpvY=0;
    std::vector<float> *llpvZ=0;
@@ -57,16 +57,8 @@ void ctau_interpolation(TString sample) {
    
    TString Path = "root://cmsxrootd.fnal.gov/";
    TString totpath = Path+sample;
-   //TString dir = "$HOME";
-   //gSystem->ExpandPathName(dir);
-   //if (!gSystem->AccessPathName(dir))
-   //    {oldfile = new TFile("$HOME/lldjntuple_mc_AOD_1.root");}
-   //else {oldfile = new TFile("/home/suho/lldjntuple_mc_AOD_1.root");}
-   cout<<"test"<<endl;
    TFile *oldfile = TFile::Open(totpath);
    TTree *oldtree = (TTree*)oldfile->Get("lldjNtuple/EventTree");
-   cout<<"test"<<endl;
-   oldtree->Print();
    oldtree->SetBranchAddress("llpvX", &llpvX);
    oldtree->SetBranchAddress("llpvY", &llpvY);
    oldtree->SetBranchAddress("llpvZ", &llpvZ);
@@ -79,9 +71,40 @@ void ctau_interpolation(TString sample) {
    oldtree->SetBranchAddress("llpMass", &llpMass);
    hTTSF = (TH1F*)oldfile->Get("lldjNtuple/hTTSF")->Clone("hTTSF");
    hEvents = (TH1F*)oldfile->Get("lldjNtuple/hEvents")->Clone("hEvents");
-   sample.Remove(0, sample.Length()-6);
-   TString outfilename = "ctau2_lldjntuple_mc_AOD_"+sample;
-   //TFile *newfile = new TFile("/uscms/home/skim2/nobackup/LLDJstandalones_Analysis/ctau/new.root","new");
+   //sample.Remove(0, sample.Length()-76);
+   //sample.Remove(sample.Length()-34,sample.Length());
+   //sample.Remove(0, sample.Length()-6);
+   //sample = sample.substr(sample.size()-6, sample.size());
+   //string outname = "ctau5_"+sample;
+   std::replace(sample.begin(), sample.end(), '/', ' ');  // replace '/' by ' ' 
+   vector<string> array;
+   stringstream ss(sample);
+   string temp;
+   while (ss >> temp)
+       array.push_back(temp);
+   cout<<array.at(0)<<endl;
+
+   string crab = array.at(6);
+   //string target = to_string(targetdist);
+   string properdist = crab.substr(crab.find("ctauS-")+6);
+   cout<<properdist<<endl;
+   float properfloat = stof(properdist);
+   cout<<properfloat<<endl;
+   float targetdist = nomtargetdist*properfloat;
+   cout<<targetdist<<endl;
+   std::stringstream stream;
+   stream << std::fixed << std::setprecision(0) << targetdist;
+   std::string target = stream.str();
+   target = "newctauS-"+target;
+   string suffix = array.at(9);
+
+   crab = crab.substr(5,crab.size());
+   cout<<crab<<endl;
+   //suffix = suffix.substr(suffix.size()-6,suffix.size());
+   cout<<suffix<<endl;
+
+   string total = crab + "_" + target + "_" + suffix;
+   TString outfilename = total;
    TFile *newfile = new TFile(outfilename,"new");
    newfile->mkdir("lldjNtuple");
    newfile->cd("lldjNtuple");
@@ -90,7 +113,6 @@ void ctau_interpolation(TString sample) {
    std::vector<float> Decay_dist;
    newtree->Branch("ctau_eventweight", &ctau_eventweight);   
    newtree->Branch("Decay_dist", &Decay_dist);   
-   newtree->Print();
  
    for (Int_t i=0;i<oldtree->GetEntries(); i++) {
    oldtree->GetEntry(i);
@@ -109,8 +131,7 @@ void ctau_interpolation(TString sample) {
    scalar1.SetPtEtaPhiM(llpPt->at(0),llpEta->at(0),llpPhi->at(0),llpMass->at(0));
    decaydist1 = diff1.Mag()/(scalar1.Gamma()*abs(scalar1.Beta()));
    Decay_dist.push_back(decaydist1);
-   cout<<decaydist1<<endl;
-   ctau_eventweight *= calculatectauEventWeight(decaydist1);
+   ctau_eventweight *= calculatectauEventWeight(decaydist1,targetdist);
 
    mother2.SetXYZ(llpvX->at(1),llpvY->at(1),llpvZ->at(1));
    daughter2.SetXYZ(llpDaughtervX->at(3),llpDaughtervY->at(3),llpDaughtervZ->at(3));
@@ -118,16 +139,13 @@ void ctau_interpolation(TString sample) {
    scalar2.SetPtEtaPhiM(llpPt->at(1),llpEta->at(1),llpPhi->at(1),llpMass->at(1));
    decaydist2 = diff2.Mag()/(scalar2.Gamma()*abs(scalar2.Beta()));
    Decay_dist.push_back(decaydist2);
-   ctau_eventweight *= calculatectauEventWeight(decaydist2);
+   ctau_eventweight *= calculatectauEventWeight(decaydist2,targetdist);
 
    newtree->Fill();
    }
-   newtree->Print();
+   //newtree->Print();
    newtree->Write();
    hTTSF->Write();
    hEvents->Write();
-   //newtree->AutoSave();
-   //delete oldfile;
-   //delete newfile;
 }
 
