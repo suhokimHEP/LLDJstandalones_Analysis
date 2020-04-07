@@ -39,6 +39,10 @@ public :
    Int_t           AODnTrksPV;
    Bool_t          AODisPVGood;
    Float_t         AODGenEventWeight;
+   std::vector<int>     *AODBunchXing;
+   std::vector<int>     *AODnPU;
+   Int_t           AOD0thnPU;
+   std::vector<int>     *AODnPUMean;
    TString         *model;
    std::vector<int>     *llpId;
    std::vector<int>     *llpStatus;
@@ -53,15 +57,21 @@ public :
    std::vector<float>   *llpDaughterPhi;
    std::vector<float>   *llpDaughterMass;
    std::vector<float>   *toppts;
-   std::vector<float>   *Decaydist;
-   std::vector<float>   *Simweight;
-   std::vector<float>   *ctauEventWeight;
+   //std::vector<float>   *Decaydist;
+   //std::vector<float>   *Simweight;
+   //std::vector<float>   *ctauEventWeight;
    std::vector<float>   *Zpt;
    std::vector<float>   *Zmass;
    std::vector<std::vector<int> > *Z_daughterID;
    std::vector<std::vector<int> > *Z_daughterPt;
    std::vector<std::vector<int> > *Z_daughterEta;
    std::vector<std::vector<int> > *Z_daughterPhi;
+   std::vector<float>   *llpvX;
+   std::vector<float>   *llpvY;
+   std::vector<float>   *llpvZ;
+   std::vector<float>   *llpDaughtervX;
+   std::vector<float>   *llpDaughtervY;
+   std::vector<float>   *llpDaughtervZ;
    ULong64_t       AOD_HLT_DoubleEle33;
    ULong64_t       AOD_HLT_Ele23Ele12;
    ULong64_t       AOD_HLT_Ele23Ele12_noDZ;
@@ -186,6 +196,10 @@ public :
    TBranch        *b_AODnTrksPV;   //!
    TBranch        *b_AODisPVGood;   //!
    TBranch        *b_AODGenEventWeight;   //!
+   TBranch        *b_AODBunchXing;   //!
+   TBranch        *b_AODnPU;   //!
+   TBranch        *b_AOD0thnPU;   //!
+   TBranch        *b_AODnPUMean;   //!
    TBranch        *b_model;   //!
    TBranch        *b_llpId;   //!
    TBranch        *b_llpStatus;   //!
@@ -200,15 +214,21 @@ public :
    TBranch        *b_llpDaughterPhi;   //!
    TBranch        *b_llpDaughterMass;   //!
    TBranch        *b_toppts;   //!
-   TBranch        *b_Decaydist;   //!
-   TBranch        *b_Simweight;   //!
-   TBranch        *b_ctauEventWeight;   //!
+   //TBranch        *b_Decaydist;   //!
+   //TBranch        *b_Simweight;   //!
+   //TBranch        *b_ctauEventWeight;   //!
    TBranch        *b_Zpt;   //!
    TBranch        *b_Zmass;   //!
    TBranch        *b_Z_daughterID;   //!
    TBranch        *b_Z_daughterPt;   //!
    TBranch        *b_Z_daughterEta;   //!
    TBranch        *b_Z_daughterPhi;   //!
+   TBranch        *b_llpvX;   //!
+   TBranch        *b_llpvY;   //!
+   TBranch        *b_llpvZ;   //!
+   TBranch        *b_llpDaughtervX;   //!
+   TBranch        *b_llpDaughtervY;   //!
+   TBranch        *b_llpDaughtervZ;   //!
    TBranch        *b_AOD_HLT_DoubleEle33;   //!
    TBranch        *b_AOD_HLT_Ele23Ele12;   //!
    TBranch        *b_AOD_HLT_Ele23Ele12_noDZ;   //!
@@ -401,6 +421,9 @@ void SampleSplit::Init(TTree *tree)
    // (once per file to be processed).
 
    // Set object pointer
+   AODBunchXing = 0;
+   AODnPU = 0;
+   AODnPUMean = 0;
    model = 0;
    llpId = 0;
    llpStatus = 0;
@@ -415,15 +438,21 @@ void SampleSplit::Init(TTree *tree)
    llpDaughterPhi = 0;
    llpDaughterMass = 0;
    toppts = 0;
-   Decaydist = 0;
-   Simweight = 0;
-   ctauEventWeight = 0;
+   //Decaydist = 0;
+   //Simweight = 0;
+   //ctauEventWeight = 0;
    Zpt = 0;
    Zmass = 0;
    Z_daughterID = 0;
    Z_daughterPt = 0;
    Z_daughterEta = 0;
    Z_daughterPhi = 0;
+   llpvX = 0;
+   llpvY = 0;
+   llpvZ = 0;
+   llpDaughtervX = 0;
+   llpDaughtervY = 0;
+   llpDaughtervZ = 0;
    AODCaloJetPt = 0;
    AODCaloJetPt_JECUp = 0;
    AODCaloJetPt_JECDown = 0;
@@ -494,7 +523,6 @@ void SampleSplit::Init(TTree *tree)
    AOD_phoSCEn = 0;
    AOD_phoSCEta = 0;
    AOD_phoSCPhi = 0;
-   AOD_phoSCPhi = 0;
    AOD_elePt = 0;
    AOD_eleEn = 0;
    AOD_eleEta = 0;
@@ -521,6 +549,10 @@ void SampleSplit::Init(TTree *tree)
    fChain->SetBranchAddress("AODnTrksPV", &AODnTrksPV, &b_AODnTrksPV);
    fChain->SetBranchAddress("AODisPVGood", &AODisPVGood, &b_AODisPVGood);
    fChain->SetBranchAddress("AODGenEventWeight", &AODGenEventWeight, &b_AODGenEventWeight);
+   fChain->SetBranchAddress("AODBunchXing", &AODBunchXing, &b_AODBunchXing);
+   fChain->SetBranchAddress("AODnPU", &AODnPU, &b_AODnPU);
+   fChain->SetBranchAddress("AOD0thnPU", &AOD0thnPU, &b_AOD0thnPU);
+   fChain->SetBranchAddress("AODnPUMean", &AODnPUMean, &b_AODnPUMean);
    fChain->SetBranchAddress("model", &model, &b_model);
    fChain->SetBranchAddress("llpId", &llpId, &b_llpId);
    fChain->SetBranchAddress("llpStatus", &llpStatus, &b_llpStatus);
@@ -535,15 +567,21 @@ void SampleSplit::Init(TTree *tree)
    fChain->SetBranchAddress("llpDaughterPhi", &llpDaughterPhi, &b_llpDaughterPhi);
    fChain->SetBranchAddress("llpDaughterMass", &llpDaughterMass, &b_llpDaughterMass);
    fChain->SetBranchAddress("toppts", &toppts, &b_toppts);
-   fChain->SetBranchAddress("Decaydist", &Decaydist, &b_Decaydist);
-   fChain->SetBranchAddress("Simweight", &Simweight, &b_Simweight);
-   fChain->SetBranchAddress("ctauEventWeight", &ctauEventWeight, &b_ctauEventWeight);
+   //fChain->SetBranchAddress("Decaydist", &Decaydist, &b_Decaydist);
+   //fChain->SetBranchAddress("Simweight", &Simweight, &b_Simweight);
+   //fChain->SetBranchAddress("ctauEventWeight", &ctauEventWeight, &b_ctauEventWeight);
    fChain->SetBranchAddress("Zpt", &Zpt, &b_Zpt);
    fChain->SetBranchAddress("Zmass", &Zmass, &b_Zmass);
    fChain->SetBranchAddress("Z_daughterID", &Z_daughterID, &b_Z_daughterID);
    fChain->SetBranchAddress("Z_daughterPt", &Z_daughterPt, &b_Z_daughterPt);
    fChain->SetBranchAddress("Z_daughterEta", &Z_daughterEta, &b_Z_daughterEta);
    fChain->SetBranchAddress("Z_daughterPhi", &Z_daughterPhi, &b_Z_daughterPhi);
+   fChain->SetBranchAddress("llpvX", &llpvX, &b_llpvX);
+   fChain->SetBranchAddress("llpvY", &llpvY, &b_llpvY);
+   fChain->SetBranchAddress("llpvZ", &llpvZ, &b_llpvZ);
+   fChain->SetBranchAddress("llpDaughtervX", &llpDaughtervX, &b_llpDaughtervX);
+   fChain->SetBranchAddress("llpDaughtervY", &llpDaughtervY, &b_llpDaughtervY);
+   fChain->SetBranchAddress("llpDaughtervZ", &llpDaughtervZ, &b_llpDaughtervZ);
    fChain->SetBranchAddress("AOD_HLT_DoubleEle33", &AOD_HLT_DoubleEle33, &b_AOD_HLT_DoubleEle33);
    fChain->SetBranchAddress("AOD_HLT_Ele23Ele12", &AOD_HLT_Ele23Ele12, &b_AOD_HLT_Ele23Ele12);
    fChain->SetBranchAddress("AOD_HLT_Ele23Ele12_noDZ", &AOD_HLT_Ele23Ele12_noDZ, &b_AOD_HLT_Ele23Ele12_noDZ);
@@ -643,7 +681,6 @@ void SampleSplit::Init(TTree *tree)
    fChain->SetBranchAddress("AOD_phoSCEn", &AOD_phoSCEn, &b_AOD_phoSCEn);
    fChain->SetBranchAddress("AOD_phoSCEta", &AOD_phoSCEta, &b_AOD_phoSCEta);
    fChain->SetBranchAddress("AOD_phoSCPhi", &AOD_phoSCPhi, &b_AOD_phoSCPhi);
-//    fChain->SetBranchAddress("AOD_phoSCPhi", &AOD_phoSCPhi, &b_AOD_phoSCPhi);
    fChain->SetBranchAddress("nAODEle", &nAODEle, &b_nAODEle);
    fChain->SetBranchAddress("AOD_elePt", &AOD_elePt, &b_AOD_elePt);
    fChain->SetBranchAddress("AOD_eleEn", &AOD_eleEn, &b_AOD_eleEn);

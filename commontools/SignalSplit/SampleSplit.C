@@ -87,7 +87,7 @@ void SampleSplit::Loop()
      hGenEventWeightSum->Write();
      TTree* EventTree_ = new TTree("EventTree", "Event data");
      EventTree_->Write();
-     ifile->Print();
+     //ifile->Print();
      delete ifile;
    }
    int count40=0;
@@ -118,27 +118,27 @@ void SampleSplit::Loop()
      for(unsigned i=0; i<samples.size(); i++){
        //std::cout<<samples[i]<<std::endl;
        if(*model==samples[i]){
-         std::cout<<i<<std::endl;
+         //std::cout<<i<<std::endl;
          //TFile *oldfile = new TFile(samples[i]+".root","update");
          TFile *file = new TFile(samples[i]+".root","update");
-         file->Print();
+         //file->Print();
          //TDirectory *lldj_ = (TDirectory*)file->Get("lldjNtuple");
          //_->cd();
           
-         std::cout<<"before get oldtree"<<std::endl;
+         //std::cout<<"before get oldtree"<<std::endl;
          TTree *oldtree = (TTree*) file->Get("lldjNtuple/EventTree");
          //TTree *oldtree = (TTree*) file->Get("EventTree");
-         std::cout<<"after get oldtree"<<std::endl;
+         //std::cout<<"after get oldtree"<<std::endl;
        
          TH1F *hTTSF_              = (TH1F *)file->Get("lldjNtuple/hTTSF");
          TH1F *hEvents_            = (TH1F *)file->Get("lldjNtuple/hEvents");
          TH1F *hGenEventWeightSum_ = (TH1F *)file->Get("lldjNtuple/hGenEventWeightSum");
-         std::cout<<" get histos"<<std::endl;
+         //std::cout<<" get histos"<<std::endl;
          file->cd("lldjNtuple");
          hTTSF_             ->Fill(1.);
          hEvents_           ->Fill(1.);
          hGenEventWeightSum_->Fill(1,AODGenEventWeight);
-         std::cout<<"fill histos"<<std::endl;
+         //std::cout<<"fill histos"<<std::endl;
          
          TTree *newTree = fChain->CloneTree(0);
          newTree->Fill();
@@ -149,15 +149,15 @@ void SampleSplit::Loop()
          //newTree->Print();
          //newTree->AutoSave();
          
-         std::cout<<"passes tree merge"<<std::endl;
+         //std::cout<<"passes tree merge"<<std::endl;
          
 
          file->Write("",TObject::kOverwrite);
-         std::cout<<"Write"<<std::endl;
+         //std::cout<<"Write"<<std::endl;
          //file->Close();
 
          finalTree->AutoSave();
-         std::cout<<"AutoSave"<<std::endl;
+         //std::cout<<"AutoSave"<<std::endl;
          //finalTree->Write();
          delete file;
          //finalTree->Reset();

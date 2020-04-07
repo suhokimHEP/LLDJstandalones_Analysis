@@ -13,7 +13,7 @@
 
 
 
-#define _debug 1
+#define _debug 0
 
 int main(int argc, char** argv)
 {
