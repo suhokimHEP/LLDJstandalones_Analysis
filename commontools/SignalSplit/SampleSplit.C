@@ -10,58 +10,67 @@
 //using namespace std;
 
 void SampleSplit::Loop()
-{
+{ 
+   //std::cout<<"Sample list name: "<<SampleName<<std::endl;
    if (fChain == 0) return;
    std::map<TString, float> nEvents;
    std::vector<TString> samples;
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-0_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-0p05_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-1_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-10_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-100_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-1000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-10000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-100000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-0_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-0p05_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-1_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-10_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-100_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-1000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-10000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-100000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-0_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-0p05_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-1_TuneCP5_13TeV-powheg-pythia8");
-   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-10_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-100_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-1000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-10000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-100000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-0_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-0p05_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-1_TuneCP5_13TeV-powheg-pythia8");
-   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-10_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-100_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-1000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-10000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-100000_TuneCP5_13TeV-powheg-pythia8");
-   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-0_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-0p05_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-1_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-10_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-100_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-1000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-10000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-100000_TuneCP5_13TeV-powheg-pythia8");
-   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-0_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-0p05_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-1_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-10_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-100_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-1000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-10000_TuneCP5_13TeV-powheg-pythia8");
-//   samples.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-100000_TuneCP5_13TeV-powheg-pythia8");
+   std::vector<TString> samples_4b_ZH;
+   std::vector<TString> samples_4b_ggZH;
+
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-0_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-0p05_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-1_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-10_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-100_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-1000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-10000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-100000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-0_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-0p05_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-1_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-10_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-100_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-1000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-10000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-100000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-0_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-0p05_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-1_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-10_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-100_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-1000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-10000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ZH.push_back(  "ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-100000_TuneCP5_13TeV-powheg-pythia8");
+
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-0_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-0p05_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-1_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-10_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-100_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-1000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-10000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-15_ctauS-100000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-0_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-0p05_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-1_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-10_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-100_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-1000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-10000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-40_ctauS-100000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-0_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-0p05_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-1_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-10_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-100_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-1000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-10000_TuneCP5_13TeV-powheg-pythia8");
+   samples_4b_ggZH.push_back("ggZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-100000_TuneCP5_13TeV-powheg-pythia8");
+   
+   if     (SampleName.Contains("4b_ggZH")) samples=samples_4b_ggZH;
+   else if(SampleName.Contains("4b_ZH"))   samples=samples_4b_ZH;
+   else std::cout<<"UNKNOWN INPUTS"<<std::endl;
 
 // Count Events/instantiate roots
    for(unsigned k = 0; k<samples.size(); k++){
@@ -78,7 +87,7 @@ void SampleSplit::Loop()
      hGenEventWeightSum->Write();
      TTree* EventTree_ = new TTree("EventTree", "Event data");
      EventTree_->Write();
-     ifile->Print();
+     //ifile->Print();
      delete ifile;
    }
    int count40=0;
@@ -109,27 +118,27 @@ void SampleSplit::Loop()
      for(unsigned i=0; i<samples.size(); i++){
        //std::cout<<samples[i]<<std::endl;
        if(*model==samples[i]){
-         std::cout<<i<<std::endl;
+         //std::cout<<i<<std::endl;
          //TFile *oldfile = new TFile(samples[i]+".root","update");
          TFile *file = new TFile(samples[i]+".root","update");
-         file->Print();
+         //file->Print();
          //TDirectory *lldj_ = (TDirectory*)file->Get("lldjNtuple");
          //_->cd();
           
-         std::cout<<"before get oldtree"<<std::endl;
+         //std::cout<<"before get oldtree"<<std::endl;
          TTree *oldtree = (TTree*) file->Get("lldjNtuple/EventTree");
          //TTree *oldtree = (TTree*) file->Get("EventTree");
-         std::cout<<"after get oldtree"<<std::endl;
+         //std::cout<<"after get oldtree"<<std::endl;
        
          TH1F *hTTSF_              = (TH1F *)file->Get("lldjNtuple/hTTSF");
          TH1F *hEvents_            = (TH1F *)file->Get("lldjNtuple/hEvents");
          TH1F *hGenEventWeightSum_ = (TH1F *)file->Get("lldjNtuple/hGenEventWeightSum");
-         std::cout<<" get histos"<<std::endl;
+         //std::cout<<" get histos"<<std::endl;
          file->cd("lldjNtuple");
          hTTSF_             ->Fill(1.);
          hEvents_           ->Fill(1.);
-         hGenEventWeightSum_->Fill(1.);
-         std::cout<<"fill histos"<<std::endl;
+         hGenEventWeightSum_->Fill(1,AODGenEventWeight);
+         //std::cout<<"fill histos"<<std::endl;
          
          TTree *newTree = fChain->CloneTree(0);
          newTree->Fill();
@@ -140,15 +149,15 @@ void SampleSplit::Loop()
          //newTree->Print();
          //newTree->AutoSave();
          
-         std::cout<<"passes tree merge"<<std::endl;
+         //std::cout<<"passes tree merge"<<std::endl;
          
 
          file->Write("",TObject::kOverwrite);
-         std::cout<<"Write"<<std::endl;
+         //std::cout<<"Write"<<std::endl;
          //file->Close();
 
          finalTree->AutoSave();
-         std::cout<<"AutoSave"<<std::endl;
+         //std::cout<<"AutoSave"<<std::endl;
          //finalTree->Write();
          delete file;
          //finalTree->Reset();
