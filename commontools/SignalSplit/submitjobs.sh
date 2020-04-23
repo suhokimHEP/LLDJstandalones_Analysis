@@ -2,11 +2,7 @@
 doSubmit=true
 
 #Set this in run_jobs.sh and mkdir beforehand
-#outDir="/eos/uscms/store/user/ddiaz/2017_ctauReweight/"
-#outDir="/eos/uscms/store/group/lpchbb/LLDJntuples/2017_ctauReweight"
-#rm -r $outDir
-#/eos/uscms/store/user/ddiaz/SignalSplitTest
-#mkdir -p $outDir
+
 
 rm -rf err
 rm -rf out
@@ -19,10 +15,19 @@ mkdir -p log
 filesPerJob=1
 nTotalJobs=0
 samples=( \
-#  "2017_4b_ggZH" \
 #  "2017_4b_ZH" \
-  "2018_4b_ggZH" \
-  "2018_4b_ZH" \
+#  "2017_4b_ggZH" \
+#  "2017_4d_ZH" \
+#  "2017_4d_ggZH" \
+#  "2017_4Tau_ZH" \
+#  "2017_4Tau_ggZH" \
+
+#  "2018_4b_ggZH" \
+#  "2018_4b_ZH" \
+#  "2018_4d_ZH" \
+#  "2018_4d_ggZH" \
+#  "2018_4Tau_ZH" \
+#  "2018_4Tau_ggZH" \
 )
 
 for sample in ${samples[@]}
