@@ -4,9 +4,8 @@ echo "TEST"
 voms-proxy-info --all
 ls -l
 echo "DONE"
-#outDir="/eos/uscms/store/user/ddiaz/2017_ctauReweightTest/"
 #outDir="root://cmseos.fnal.gov//store/group/lpchbb/LLDJntuples/2017_ctauReweightTest/"
-outDir="root://cmseos.fnal.gov//store/group/lpchbb/LLDJntuples/2018_ctauReweightTest/"
+#outDir="root://cmseos.fnal.gov//store/group/lpchbb/LLDJntuples/2018_ctauReweightTest/"
 echo output directory, $outDir
 
 source /cvmfs/cms.cern.ch/cmsset_default.sh
