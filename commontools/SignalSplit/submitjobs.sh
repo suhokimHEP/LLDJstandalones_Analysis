@@ -1,10 +1,8 @@
 
 doSubmit=true
 
-outDir="/eos/uscms/store/user/ddiaz/SignalSplitTest/"
-rm -r $outDir
-#/eos/uscms/store/user/ddiaz/SignalSplitTest
-mkdir -p $outDir
+#Set this in run_jobs.sh and mkdir beforehand
+
 
 rm -rf err
 rm -rf out
@@ -14,12 +12,22 @@ mkdir -p err
 mkdir -p out
 mkdir -p log
 
-filesPerJob=5
+filesPerJob=1
+nTotalJobs=0
 samples=( \
-  "2017_ggZH" \
-#  "2017_ZH" \
-#  "2018_ggZH" \
-#  "2018_ZH" \
+#  "2017_4b_ZH" \
+#  "2017_4b_ggZH" \
+#  "2017_4d_ZH" \
+#  "2017_4d_ggZH" \
+#  "2017_4Tau_ZH" \
+#  "2017_4Tau_ggZH" \
+
+#  "2018_4b_ggZH" \
+#  "2018_4b_ZH" \
+#  "2018_4d_ZH" \
+#  "2018_4d_ggZH" \
+#  "2018_4Tau_ZH" \
+#  "2018_4Tau_ggZH" \
 )
 
 for sample in ${samples[@]}
@@ -27,7 +35,7 @@ do
   nlines=`cat inputLists/${sample}.list | wc -l`
   njobs1=$((nlines/filesPerJob))
   njobs2=$((nlines%filesPerJob))
-  if [ $njobs2 > 0 ]
+  if [ $njobs2 -gt 0 ]
   then
     echo adding one
     njobs=$((njobs1+1))
@@ -35,6 +43,7 @@ do
     echo not adding one
     njobs=$((njobs1))
   fi
+  nTotalJobs=$((nTotalJobs+njobs))
   #echo $sample, $nlines
   #echo number of submits, $njobs, $njobs1, $njobs2
   split -l $filesPerJob -d -a 2 --additional-suffix=.list inputLists/${sample}.list ${sample}"_"
@@ -75,5 +84,7 @@ do
      condor_submit submitfile
     fi
   done 
+  echo
+  echo "nTotalJobs submitted:" $nTotalJobs
   #rm *.list
 done

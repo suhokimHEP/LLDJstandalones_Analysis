@@ -4,8 +4,8 @@ echo "TEST"
 voms-proxy-info --all
 ls -l
 echo "DONE"
-#outDir="/eos/uscms/store/user/ddiaz/SignalSplitTest/"
-outDir="root://cmseos.fnal.gov//store/user/ddiaz/SignalSplitTest/"
+#outDir="root://cmseos.fnal.gov//store/group/lpchbb/LLDJntuples/2017_ctauReweightTest/"
+#outDir="root://cmseos.fnal.gov//store/group/lpchbb/LLDJntuples/2018_ctauReweightTest/"
 echo output directory, $outDir
 
 source /cvmfs/cms.cern.ch/cmsset_default.sh
@@ -28,7 +28,7 @@ echo "now run"
 
 for FILE in *.root
 do
-  echo "xrdcp -f ${FILE} ${OUTDIR}/${FILE}"
+  echo "xrdcp -f ${FILE} ${outDir}/${FILE}"
   echo "${FILE}" 
   echo "${outDir}"
   xrdcp -f ${FILE} ${outDir}/${1}_${FILE} 2>&1
