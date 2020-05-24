@@ -86,10 +86,9 @@ void ctau_interpolation(string sample) {
        array.push_back(temp);
    cout<<array.at(0)<<endl;
 
-   string crab = array.at(9);
+   string crab = array.at(6);
    //string target = to_string(targetdist);
-   //string properdist = crab.substr(crab.find("ctauS-")+6,crab.size()-34);
-   string properdist = crab.substr(crab.find("ctauS-")+6,crab.find("TuneCP5")-1);
+   string properdist = crab.substr(crab.find("ctauS-")+6);
    cout<<properdist<<endl;
    float properfloat = stof(properdist);
    cout<<properfloat<<endl;
@@ -99,15 +98,14 @@ void ctau_interpolation(string sample) {
    stream << std::fixed << std::setprecision(0) << targetdist;
    std::string target = stream.str();
    target = "newctauS-"+target;
-   //string suffix = array.at(9);
+   string suffix = array.at(9);
 
-   crab = crab.substr(0,crab.find("TuneCP5"));
+   crab = crab.substr(5,crab.size());
    cout<<crab<<endl;
    //suffix = suffix.substr(suffix.size()-6,suffix.size());
-   //cout<<suffix<<endl;
+   cout<<suffix<<endl;
 
-   //string total = crab + "_" + target + "_" + suffix;
-   string total = crab + target + ".root";
+   string total = crab + "_" + target + "_" + suffix;
    TString outfilename = total;
    TFile *newfile = new TFile(outfilename,"new");
    newfile->mkdir("lldjNtuple");

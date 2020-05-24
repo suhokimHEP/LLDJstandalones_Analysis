@@ -39,7 +39,7 @@ else  {
         }
  return weight;
  }
-void ctau_interpolation(string sample) {
+void Zdark_ctau_interpolation(string sample) {
    //Get old file, old tree and set top branch address
    gErrorIgnoreLevel = kBreak;
    std::vector<float> *llpvX=0;
@@ -72,7 +72,7 @@ void ctau_interpolation(string sample) {
    oldtree->SetBranchAddress("llpMass", &llpMass);
    hTTSF = (TH1F*)oldfile->Get("lldjNtuple/hTTSF")->Clone("hTTSF");
    hEvents = (TH1F*)oldfile->Get("lldjNtuple/hEvents")->Clone("hEvents");
-   hGenEventWeightSum = (TH1F*)oldfile->Get("lldjNtuple/hGenEventWeightSum")->Clone("hGenEventWeightSum");
+   //hGenEventWeightSum = (TH1F*)oldfile->Get("lldjNtuple/hGenEventWeightSum")->Clone("hGenEventWeightSum");
    //sample.Remove(0, sample.Length()-76);
    //sample.Remove(sample.Length()-34,sample.Length());
    //sample.Remove(0, sample.Length()-6);
@@ -86,10 +86,9 @@ void ctau_interpolation(string sample) {
        array.push_back(temp);
    cout<<array.at(0)<<endl;
 
-   string crab = array.at(9);
+   string crab = array.at(6);
    //string target = to_string(targetdist);
-   //string properdist = crab.substr(crab.find("ctauS-")+6,crab.size()-34);
-   string properdist = crab.substr(crab.find("ctauS-")+6,crab.find("TuneCP5")-1);
+   string properdist = crab.substr(crab.find("ctauS-")+6);
    cout<<properdist<<endl;
    float properfloat = stof(properdist);
    cout<<properfloat<<endl;
@@ -99,15 +98,14 @@ void ctau_interpolation(string sample) {
    stream << std::fixed << std::setprecision(0) << targetdist;
    std::string target = stream.str();
    target = "newctauS-"+target;
-   //string suffix = array.at(9);
+   string suffix = array.at(9);
 
-   crab = crab.substr(0,crab.find("TuneCP5"));
+   crab = crab.substr(5,crab.size());
    cout<<crab<<endl;
    //suffix = suffix.substr(suffix.size()-6,suffix.size());
-   //cout<<suffix<<endl;
+   cout<<suffix<<endl;
 
-   //string total = crab + "_" + target + "_" + suffix;
-   string total = crab + target + ".root";
+   string total = crab + "_" + target + "_" + suffix;
    TString outfilename = total;
    TFile *newfile = new TFile(outfilename,"new");
    newfile->mkdir("lldjNtuple");
@@ -130,20 +128,12 @@ void ctau_interpolation(string sample) {
    TVector3 mother2,daughter2,diff2 (0,0,0);
 
    mother1.SetXYZ(llpvX->at(0),llpvY->at(0),llpvZ->at(0));
-   daughter1.SetXYZ(llpDaughtervX->at(1),llpDaughtervY->at(1),llpDaughtervZ->at(1));
+   daughter1.SetXYZ(llpDaughtervX->at(0),llpDaughtervY->at(0),llpDaughtervZ->at(0));
    diff1.SetXYZ(mother1.X()-daughter1.X(),mother1.Y()-daughter1.Y(),mother1.Z()-daughter1.Z());
    scalar1.SetPtEtaPhiM(llpPt->at(0),llpEta->at(0),llpPhi->at(0),llpMass->at(0));
    decaydist1 = diff1.Mag()/(scalar1.Gamma()*abs(scalar1.Beta()));
    Decay_dist.push_back(decaydist1);
    ctau_eventweight *= calculatectauEventWeight(decaydist1,targetdist);
-
-   mother2.SetXYZ(llpvX->at(1),llpvY->at(1),llpvZ->at(1));
-   daughter2.SetXYZ(llpDaughtervX->at(3),llpDaughtervY->at(3),llpDaughtervZ->at(3));
-   diff2.SetXYZ(mother2.X()-daughter2.X(),mother2.Y()-daughter2.Y(),mother2.Z()-daughter2.Z());
-   scalar2.SetPtEtaPhiM(llpPt->at(1),llpEta->at(1),llpPhi->at(1),llpMass->at(1));
-   decaydist2 = diff2.Mag()/(scalar2.Gamma()*abs(scalar2.Beta()));
-   Decay_dist.push_back(decaydist2);
-   ctau_eventweight *= calculatectauEventWeight(decaydist2,targetdist);
 
    newtree->Fill();
    }
@@ -151,6 +141,6 @@ void ctau_interpolation(string sample) {
    newtree->Write();
    hTTSF->Write();
    hEvents->Write();
-   hGenEventWeightSum->Write();
+   //hGenEventWeightSum->Write();
 }
 

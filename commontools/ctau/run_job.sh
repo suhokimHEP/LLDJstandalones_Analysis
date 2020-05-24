@@ -27,7 +27,13 @@ ls -la ../../
 root -l -b -q "ctau_interpolation.C("'"'"$1"'"'")"
 
 #gfal-copy -f *.txt /uscms/home/ddiaz/nobackup/ANComments/OPT/Condor/FromCristian/Results/
-gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/user/skim2/ctau/Results/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/user/skim2/ctau/Results2/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2018_ctauReweightTest/ctauE/dir1/dir2/4d/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2016_ctauReweightTest_2/ctauE/dir1/dir2/4b/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2017_ctauReweightTest/ctauE/dir1/dir2/4d/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2016_ctauReweightTest_2/ctauE/dir1/dir2/Zdark/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2018_ctauReweightTest/ctauE/dir1/dir2/4Tau/
+gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2017_ctauReweightTest/ctauE/dir1/dir2/4Tau/
 
 #cp Results/*.txt root://cmseos.fnal.gov//store/group/lpchbb/LLDJntuples/cmorgoth/.
 
