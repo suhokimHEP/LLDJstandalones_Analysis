@@ -11,13 +11,10 @@
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
+#include <map>
 
 // Header file for the classes stored in the TTree if any.
 #include "TString.h"
-#include "vector"
-#include "vector"
-#include "vector"
-#include "vector"
 #include "vector"
 #include <vector>
 
@@ -27,22 +24,24 @@ public :
    Int_t           fCurrent; //!current Tree number in a TChain
    TString         SampleName;
 // Fixed size dimensions of array or collections stored in the TTree if any.
-
+   
    // Declaration of leaf types
    Int_t           run;
    Long64_t        event;
    Int_t           lumis;
    Bool_t          isData;
    Int_t           AODnTruePU;
+   Int_t           AOD0thnPU;
    Int_t           AODnVtx;
    Int_t           AODnGoodVtx;
    Int_t           AODnTrksPV;
    Bool_t          AODisPVGood;
    Float_t         AODGenEventWeight;
+   Float_t         AODfixedGridRhoFastjetAll;
+   Int_t           AODnBunchXing;
    std::vector<int>     *AODBunchXing;
    std::vector<int>     *AODnPU;
-   Int_t           AOD0thnPU;
-   std::vector<int>     *AODnPUMean;
+   std::vector<float>   *AODnPUmean;
    TString         *model;
    std::vector<int>     *llpId;
    std::vector<int>     *llpStatus;
@@ -57,15 +56,19 @@ public :
    std::vector<float>   *llpDaughterPhi;
    std::vector<float>   *llpDaughterMass;
    std::vector<float>   *toppts;
-   //std::vector<float>   *Decaydist;
-   //std::vector<float>   *Simweight;
-   //std::vector<float>   *ctauEventWeight;
-   std::vector<float>   *Zpt;
-   std::vector<float>   *Zmass;
-   std::vector<std::vector<int> > *Z_daughterID;
-   std::vector<std::vector<int> > *Z_daughterPt;
-   std::vector<std::vector<int> > *Z_daughterEta;
-   std::vector<std::vector<int> > *Z_daughterPhi;
+   Float_t         gen_Z_mass;
+   Float_t         gen_Z_energy;
+   Float_t         gen_Z_pt;
+   Float_t         gen_Z_eta;
+   Float_t         gen_Z_phi;
+   Float_t         gen_Z_dauther1_Id;
+   Float_t         gen_Z_dauther2_Id;
+   std::vector<float>   *gen_lep_energy;
+   std::vector<float>   *gen_lep_pt;
+   std::vector<float>   *gen_lep_eta;
+   std::vector<float>   *gen_lep_phi;
+   std::vector<int>     *gen_lep_Id;
+   std::vector<int>     *gen_lep_momId;
    std::vector<float>   *llpvX;
    std::vector<float>   *llpvY;
    std::vector<float>   *llpvZ;
@@ -99,11 +102,18 @@ public :
    ULong64_t       AOD_HLT_Mu12Ele23_DZ_isPS;
    ULong64_t       AOD_HLT_Mu12Ele23_noDZ_isPS;
    Int_t           AODnCaloJet;
+   std::vector<float>   *AODCaloJetEnergy;
    std::vector<float>   *AODCaloJetPt;
+   std::vector<float>   *AODCaloJetEnergyUncorrected;
+   std::vector<float>   *AODCaloJetPtUncorrected;
    std::vector<float>   *AODCaloJetPt_JECUp;
    std::vector<float>   *AODCaloJetPt_JECDown;
    std::vector<float>   *AODCaloJetEta;
    std::vector<float>   *AODCaloJetPhi;
+   std::vector<bool>    *AODCaloJetID;
+   std::vector<float>   *AODCaloJetMass;
+   std::vector<float>   *AODCaloJetArea;
+   std::vector<float>   *AODCaloJetPileup;
    std::vector<float>   *AODCaloJetAlphaMax;
    std::vector<float>   *AODCaloJetAlphaMax2;
    std::vector<float>   *AODCaloJetAlphaMaxPrime;
@@ -191,15 +201,17 @@ public :
    TBranch        *b_lumis;   //!
    TBranch        *b_isData;   //!
    TBranch        *b_AODnTruePU;   //!
+   TBranch        *b_AOD0thnPU;   //!
    TBranch        *b_AODnVtx;   //!
    TBranch        *b_AODnGoodVtx;   //!
    TBranch        *b_AODnTrksPV;   //!
    TBranch        *b_AODisPVGood;   //!
    TBranch        *b_AODGenEventWeight;   //!
+   TBranch        *b_AODfixedGridRhoFastjetAll;   //!
+   TBranch        *b_AODnBunchXing;   //!
    TBranch        *b_AODBunchXing;   //!
    TBranch        *b_AODnPU;   //!
-   TBranch        *b_AOD0thnPU;   //!
-   TBranch        *b_AODnPUMean;   //!
+   TBranch        *b_AODnPUmean;   //!
    TBranch        *b_model;   //!
    TBranch        *b_llpId;   //!
    TBranch        *b_llpStatus;   //!
@@ -214,15 +226,19 @@ public :
    TBranch        *b_llpDaughterPhi;   //!
    TBranch        *b_llpDaughterMass;   //!
    TBranch        *b_toppts;   //!
-   //TBranch        *b_Decaydist;   //!
-   //TBranch        *b_Simweight;   //!
-   //TBranch        *b_ctauEventWeight;   //!
-   TBranch        *b_Zpt;   //!
-   TBranch        *b_Zmass;   //!
-   TBranch        *b_Z_daughterID;   //!
-   TBranch        *b_Z_daughterPt;   //!
-   TBranch        *b_Z_daughterEta;   //!
-   TBranch        *b_Z_daughterPhi;   //!
+   TBranch        *b_gen_Z_mass;   //!
+   TBranch        *b_gen_Z_energy;   //!
+   TBranch        *b_gen_Z_pt;   //!
+   TBranch        *b_gen_Z_eta;   //!
+   TBranch        *b_gen_Z_phi;   //!
+   TBranch        *b_gen_Z_dauther1_Id;   //!
+   TBranch        *b_gen_Z_dauther2_Id;   //!
+   TBranch        *b_gen_lep_energy;   //!
+   TBranch        *b_gen_lep_pt;   //!
+   TBranch        *b_gen_lep_eta;   //!
+   TBranch        *b_gen_lep_phi;   //!
+   TBranch        *b_gen_lep_Id;   //!
+   TBranch        *b_gen_lep_momId;   //!
    TBranch        *b_llpvX;   //!
    TBranch        *b_llpvY;   //!
    TBranch        *b_llpvZ;   //!
@@ -256,11 +272,18 @@ public :
    TBranch        *b_AOD_HLT_Mu12Ele23_DZ_isPS;   //!
    TBranch        *b_AOD_HLT_Mu12Ele23_noDZ_isPS;   //!
    TBranch        *b_AODnCaloJet;   //!
+   TBranch        *b_AODCaloJetEnergy;   //!
    TBranch        *b_AODCaloJetPt;   //!
+   TBranch        *b_AODCaloJetEnergyUncorrected;   //!
+   TBranch        *b_AODCaloJetPtUncorrected;   //!
    TBranch        *b_AODCaloJetPt_JECUp;   //!
    TBranch        *b_AODCaloJetPt_JECDown;   //!
    TBranch        *b_AODCaloJetEta;   //!
    TBranch        *b_AODCaloJetPhi;   //!
+   TBranch        *b_AODCaloJetID;   //!
+   TBranch        *b_AODCaloJetMass;   //!
+   TBranch        *b_AODCaloJetArea;   //!
+   TBranch        *b_AODCaloJetPileup;   //!
    TBranch        *b_AODCaloJetAlphaMax;   //!
    TBranch        *b_AODCaloJetAlphaMax2;   //!
    TBranch        *b_AODCaloJetAlphaMaxPrime;   //!
@@ -419,11 +442,12 @@ void SampleSplit::Init(TTree *tree)
    // code, but the routine can be extended by the user if needed.
    // Init() will be called many times when running on PROOF
    // (once per file to be processed).
+   
 
    // Set object pointer
    AODBunchXing = 0;
    AODnPU = 0;
-   AODnPUMean = 0;
+   AODnPUmean = 0; 
    model = 0;
    llpId = 0;
    llpStatus = 0;
@@ -438,26 +462,30 @@ void SampleSplit::Init(TTree *tree)
    llpDaughterPhi = 0;
    llpDaughterMass = 0;
    toppts = 0;
-   //Decaydist = 0;
-   //Simweight = 0;
-   //ctauEventWeight = 0;
-   Zpt = 0;
-   Zmass = 0;
-   Z_daughterID = 0;
-   Z_daughterPt = 0;
-   Z_daughterEta = 0;
-   Z_daughterPhi = 0;
+   gen_lep_energy = 0;
+   gen_lep_pt = 0;
+   gen_lep_eta = 0;
+   gen_lep_phi = 0;
+   gen_lep_Id = 0;
+   gen_lep_momId = 0;
    llpvX = 0;
    llpvY = 0;
    llpvZ = 0;
    llpDaughtervX = 0;
    llpDaughtervY = 0;
    llpDaughtervZ = 0;
+   AODCaloJetEnergy = 0;
    AODCaloJetPt = 0;
+   AODCaloJetEnergyUncorrected = 0;
+   AODCaloJetPtUncorrected = 0;
    AODCaloJetPt_JECUp = 0;
    AODCaloJetPt_JECDown = 0;
    AODCaloJetEta = 0;
    AODCaloJetPhi = 0;
+   AODCaloJetID = 0;
+   AODCaloJetMass = 0;
+   AODCaloJetArea = 0;
+   AODCaloJetPileup = 0;
    AODCaloJetAlphaMax = 0;
    AODCaloJetAlphaMax2 = 0;
    AODCaloJetAlphaMaxPrime = 0;
@@ -544,15 +572,17 @@ void SampleSplit::Init(TTree *tree)
    fChain->SetBranchAddress("lumis", &lumis, &b_lumis);
    fChain->SetBranchAddress("isData", &isData, &b_isData);
    fChain->SetBranchAddress("AODnTruePU", &AODnTruePU, &b_AODnTruePU);
+   fChain->SetBranchAddress("AOD0thnPU", &AOD0thnPU, &b_AOD0thnPU);
    fChain->SetBranchAddress("AODnVtx", &AODnVtx, &b_AODnVtx);
    fChain->SetBranchAddress("AODnGoodVtx", &AODnGoodVtx, &b_AODnGoodVtx);
    fChain->SetBranchAddress("AODnTrksPV", &AODnTrksPV, &b_AODnTrksPV);
    fChain->SetBranchAddress("AODisPVGood", &AODisPVGood, &b_AODisPVGood);
    fChain->SetBranchAddress("AODGenEventWeight", &AODGenEventWeight, &b_AODGenEventWeight);
+   fChain->SetBranchAddress("AODfixedGridRhoFastjetAll", &AODfixedGridRhoFastjetAll, &b_AODfixedGridRhoFastjetAll);
+   fChain->SetBranchAddress("AODnBunchXing", &AODnBunchXing, &b_AODnBunchXing);
    fChain->SetBranchAddress("AODBunchXing", &AODBunchXing, &b_AODBunchXing);
    fChain->SetBranchAddress("AODnPU", &AODnPU, &b_AODnPU);
-   fChain->SetBranchAddress("AOD0thnPU", &AOD0thnPU, &b_AOD0thnPU);
-   fChain->SetBranchAddress("AODnPUMean", &AODnPUMean, &b_AODnPUMean);
+   fChain->SetBranchAddress("AODnPUmean", &AODnPUmean, &b_AODnPUmean);
    fChain->SetBranchAddress("model", &model, &b_model);
    fChain->SetBranchAddress("llpId", &llpId, &b_llpId);
    fChain->SetBranchAddress("llpStatus", &llpStatus, &b_llpStatus);
@@ -567,15 +597,19 @@ void SampleSplit::Init(TTree *tree)
    fChain->SetBranchAddress("llpDaughterPhi", &llpDaughterPhi, &b_llpDaughterPhi);
    fChain->SetBranchAddress("llpDaughterMass", &llpDaughterMass, &b_llpDaughterMass);
    fChain->SetBranchAddress("toppts", &toppts, &b_toppts);
-   //fChain->SetBranchAddress("Decaydist", &Decaydist, &b_Decaydist);
-   //fChain->SetBranchAddress("Simweight", &Simweight, &b_Simweight);
-   //fChain->SetBranchAddress("ctauEventWeight", &ctauEventWeight, &b_ctauEventWeight);
-   fChain->SetBranchAddress("Zpt", &Zpt, &b_Zpt);
-   fChain->SetBranchAddress("Zmass", &Zmass, &b_Zmass);
-   fChain->SetBranchAddress("Z_daughterID", &Z_daughterID, &b_Z_daughterID);
-   fChain->SetBranchAddress("Z_daughterPt", &Z_daughterPt, &b_Z_daughterPt);
-   fChain->SetBranchAddress("Z_daughterEta", &Z_daughterEta, &b_Z_daughterEta);
-   fChain->SetBranchAddress("Z_daughterPhi", &Z_daughterPhi, &b_Z_daughterPhi);
+   fChain->SetBranchAddress("gen_Z_mass", &gen_Z_mass, &b_gen_Z_mass);
+   fChain->SetBranchAddress("gen_Z_energy", &gen_Z_energy, &b_gen_Z_energy);
+   fChain->SetBranchAddress("gen_Z_pt", &gen_Z_pt, &b_gen_Z_pt);
+   fChain->SetBranchAddress("gen_Z_eta", &gen_Z_eta, &b_gen_Z_eta);
+   fChain->SetBranchAddress("gen_Z_phi", &gen_Z_phi, &b_gen_Z_phi);
+   fChain->SetBranchAddress("gen_Z_dauther1_Id", &gen_Z_dauther1_Id, &b_gen_Z_dauther1_Id);
+   fChain->SetBranchAddress("gen_Z_dauther2_Id", &gen_Z_dauther2_Id, &b_gen_Z_dauther2_Id);
+   fChain->SetBranchAddress("gen_lep_energy", &gen_lep_energy, &b_gen_lep_energy);
+   fChain->SetBranchAddress("gen_lep_pt", &gen_lep_pt, &b_gen_lep_pt);
+   fChain->SetBranchAddress("gen_lep_eta", &gen_lep_eta, &b_gen_lep_eta);
+   fChain->SetBranchAddress("gen_lep_phi", &gen_lep_phi, &b_gen_lep_phi);
+   fChain->SetBranchAddress("gen_lep_Id", &gen_lep_Id, &b_gen_lep_Id);
+   fChain->SetBranchAddress("gen_lep_momId", &gen_lep_momId, &b_gen_lep_momId);
    fChain->SetBranchAddress("llpvX", &llpvX, &b_llpvX);
    fChain->SetBranchAddress("llpvY", &llpvY, &b_llpvY);
    fChain->SetBranchAddress("llpvZ", &llpvZ, &b_llpvZ);
@@ -609,11 +643,18 @@ void SampleSplit::Init(TTree *tree)
    fChain->SetBranchAddress("AOD_HLT_Mu12Ele23_DZ_isPS", &AOD_HLT_Mu12Ele23_DZ_isPS, &b_AOD_HLT_Mu12Ele23_DZ_isPS);
    fChain->SetBranchAddress("AOD_HLT_Mu12Ele23_noDZ_isPS", &AOD_HLT_Mu12Ele23_noDZ_isPS, &b_AOD_HLT_Mu12Ele23_noDZ_isPS);
    fChain->SetBranchAddress("AODnCaloJet", &AODnCaloJet, &b_AODnCaloJet);
+   fChain->SetBranchAddress("AODCaloJetEnergy", &AODCaloJetEnergy, &b_AODCaloJetEnergy);
    fChain->SetBranchAddress("AODCaloJetPt", &AODCaloJetPt, &b_AODCaloJetPt);
+   fChain->SetBranchAddress("AODCaloJetEnergyUncorrected", &AODCaloJetEnergyUncorrected, &b_AODCaloJetEnergyUncorrected);
+   fChain->SetBranchAddress("AODCaloJetPtUncorrected", &AODCaloJetPtUncorrected, &b_AODCaloJetPtUncorrected);
    fChain->SetBranchAddress("AODCaloJetPt_JECUp", &AODCaloJetPt_JECUp, &b_AODCaloJetPt_JECUp);
    fChain->SetBranchAddress("AODCaloJetPt_JECDown", &AODCaloJetPt_JECDown, &b_AODCaloJetPt_JECDown);
    fChain->SetBranchAddress("AODCaloJetEta", &AODCaloJetEta, &b_AODCaloJetEta);
    fChain->SetBranchAddress("AODCaloJetPhi", &AODCaloJetPhi, &b_AODCaloJetPhi);
+   fChain->SetBranchAddress("AODCaloJetID", &AODCaloJetID, &b_AODCaloJetID);
+   fChain->SetBranchAddress("AODCaloJetMass", &AODCaloJetMass, &b_AODCaloJetMass);
+   fChain->SetBranchAddress("AODCaloJetArea", &AODCaloJetArea, &b_AODCaloJetArea);
+   fChain->SetBranchAddress("AODCaloJetPileup", &AODCaloJetPileup, &b_AODCaloJetPileup);
    fChain->SetBranchAddress("AODCaloJetAlphaMax", &AODCaloJetAlphaMax, &b_AODCaloJetAlphaMax);
    fChain->SetBranchAddress("AODCaloJetAlphaMax2", &AODCaloJetAlphaMax2, &b_AODCaloJetAlphaMax2);
    fChain->SetBranchAddress("AODCaloJetAlphaMaxPrime", &AODCaloJetAlphaMaxPrime, &b_AODCaloJetAlphaMaxPrime);
@@ -694,6 +735,7 @@ void SampleSplit::Init(TTree *tree)
    fChain->SetBranchAddress("AOD_elePassConversionVeto", &AOD_elePassConversionVeto, &b_AOD_elePassConversionVeto);
    fChain->SetBranchAddress("AOD_CaloMET_pt", &AOD_CaloMET_pt, &b_AOD_CaloMET_pt);
    fChain->SetBranchAddress("AOD_CaloMET_phi", &AOD_CaloMET_phi, &b_AOD_CaloMET_phi);
+
    Notify();
 }
 
