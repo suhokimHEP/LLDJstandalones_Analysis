@@ -12,7 +12,6 @@
 #include <malloc.h>
 
 
-
 #define _debug 0
 
 int main(int argc, char** argv)
@@ -20,9 +19,15 @@ int main(int argc, char** argv)
   //Get input file from command line
   // if not present program will quit
   std::string input_list = ParseCommandLine( argc, argv, "input_list");
+  std::string name = ParseCommandLine( argc, argv, "name");
   if( input_list == "" || input_list == "not-found" )
     {
-      std::cerr << "[ERROR]: Provide an input list using --input_list=<your_input_list>.\nExiting programs!!" << std::endl;
+      std::cerr << "[ERROR]: Provide an input list using --input_list=<your_input_list>.\nExiting program!!" << std::endl;
+      return -1;
+    }
+  if( name == "" || name == "not-found" )
+    {
+      std::cerr << "[ERROR]: Provide sample name using --name=<sample_name>.\nExiting program!!" << std::endl;
       return -1;
     }
 
@@ -39,7 +44,6 @@ int main(int argc, char** argv)
   //define main TChain
   //----------------------
   TChain* chain = new TChain("lldjNtuple/EventTree");
-
   //-----------------------------------------------
   //Start reading input list and concatenate TChain
   //-----------------------------------------------
@@ -60,8 +64,7 @@ int main(int argc, char** argv)
   //Require a valid TChain called <chain>
   //------------------------------------------
   SampleSplit* evt = new SampleSplit( chain );
-  evt->SampleName = input_list;
-  //evt->fatjet_pt_trh = 250.0;
+  evt->SampleName = name;
   //-----------------------------------------
   //Running main Loop for HH analysis
   //-----------------------------------------

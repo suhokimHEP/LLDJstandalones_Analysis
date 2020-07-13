@@ -4,6 +4,7 @@ echo "TEST"
 voms-proxy-info --all
 ls -l
 echo "DONE"
+outDir="root://cmseos.fnal.gov//store/group/lpchbb/LLDJntuples/2018_LLDJ_V2p0_ctauReweight_test_2/"
 #outDir="root://cmseos.fnal.gov//store/group/lpchbb/LLDJntuples/2017_ctauReweightTest/"
 #outDir="root://cmseos.fnal.gov//store/group/lpchbb/LLDJntuples/2018_ctauReweightTest/"
 echo output directory, $outDir
@@ -24,7 +25,7 @@ echo "doing ls ../../"
 ls ../../
 echo "now run"
 
-./SignalSplit.exe --input_list=$1
+./SignalSplit.exe --input_list=$1 --name=$2
 
 for FILE in *.root
 do
