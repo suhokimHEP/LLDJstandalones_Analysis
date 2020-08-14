@@ -33,7 +33,15 @@ root -l -b -q "ctau_interpolation.C("'"'"$1"'"'")"
 #gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2017_ctauReweightTest/ctauE/dir1/dir2/4d/
 #gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2016_ctauReweightTest_2/ctauE/dir1/dir2/Zdark/
 #gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2018_ctauReweightTest/ctauE/dir1/dir2/4Tau/
-gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2017_ctauReweightTest/ctauE/dir1/dir2/4Tau/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2018_LLDJ_V2p0/ctauE/dir1/dir2/4b/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2018_LLDJ_V2p0/ctauE/dir1/dir2/4d/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2018_LLDJ_V2p0/ctauE/dir1/dir2/4Tau/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2017_LLDJ_V2p0/ctauE/dir1/dir2/4b/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2017_LLDJ_V2p0/ctauE/dir1/dir2/4d/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2017_LLDJ_V2p0/ctauE/dir1/dir2/4Tau/
+gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2016_LLDJ_V2p0_2/ctauE/dir1/dir2/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2016_LLDJ_V2p0_2/ctauE/dir1/dir2/4d/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2016_LLDJ_V2p0_2/ctauE/dir1/dir2/4Tau/
 
 #cp Results/*.txt root://cmseos.fnal.gov//store/group/lpchbb/LLDJntuples/cmorgoth/.
 

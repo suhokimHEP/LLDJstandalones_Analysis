@@ -1,0 +1,17 @@
+Universe = vanilla
+Executable = run_job.sh
+Should_Transfer_Files = YES 
+WhenToTransferOutput = ON_EXIT
+Transfer_Input_Files = ctau_interpolation.C, cms_setup.tar.gz
+notify_user = skim2@cern.ch
+x509userproxy = $ENV(X509_USER_PROXY)
+
+Output = out/OPT.$(Cluster)_$(Process).stdout
+Error  = err/OPT.$(Cluster)_$(Process).stderr
+Log    = log/OPT.$(Cluster)_$(Process).log
+
+request_memory = 200
+request_disk = 1000 MB
+
+Arguments = $(file)
+Queue file from ggZH_HToSSTo4Tau_ZToLL_MH-125_MS-55_ctauS-10.list
