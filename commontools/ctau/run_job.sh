@@ -25,9 +25,14 @@ ls -la ../../
 
 #root -l -b -q 'taggerSlim.C(0.4, -1.45, "2016", "DYJetsToLL_M-10to50_OPTtree.root")'
 root -l -b -q "ctau_interpolation.C("'"'"$1"'"'")"
-
+ls -la 
 #gfal-copy -f *.txt /uscms/home/ddiaz/nobackup/ANComments/OPT/Condor/FromCristian/Results/
-#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/user/skim2/ctau/Results2/
+
+xrdcp *.root root://cmseos.fnal.gov//store/user/skim2
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/user/skim2
+#gfal-copy -f *.root /eos/uscms/store/user/skim2
+#gfal-copy -f *.root /eos/uscms/store/user/skim2
+#cp  *.root root://cmseos.fnal.gov//store/user/skim2
 #gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2018_ctauReweightTest/ctauE/dir1/dir2/4d/
 #gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2016_ctauReweightTest_2/ctauE/dir1/dir2/4b/
 #gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2017_ctauReweightTest/ctauE/dir1/dir2/4d/
@@ -39,7 +44,7 @@ root -l -b -q "ctau_interpolation.C("'"'"$1"'"'")"
 #gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2017_LLDJ_V2p0/ctauE/dir1/dir2/4b/
 #gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2017_LLDJ_V2p0/ctauE/dir1/dir2/4d/
 #gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2017_LLDJ_V2p0/ctauE/dir1/dir2/4Tau/
-gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2016_LLDJ_V2p0_2/ctauE/dir1/dir2/
+#gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2016_LLDJ_V2p0_2/ctauE/dir1/dir2/
 #gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2016_LLDJ_V2p0_2/ctauE/dir1/dir2/4d/
 #gfal-copy -f *.root gsiftp://cmseos-gridftp.fnal.gov//store/group/lpchbb/LLDJntuples/2016_LLDJ_V2p0_2/ctauE/dir1/dir2/4Tau/
 
