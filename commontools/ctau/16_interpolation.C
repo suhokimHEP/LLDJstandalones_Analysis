@@ -16,22 +16,14 @@
 #include <cstdlib> /* mkdir */
 #include <stdlib.h>     /* getenv */
 
-float nomtargetdist = .5;	
-Float_t calculatectauEventWeight( float dist, float targetdist )
+float nomtargetdist = .1;	
+Float_t calculatectauEventWeight( float dist, float orig_ct, float new_ct )
 {
  float weight, factor;
-if (targetdist<10 && 1 < targetdist) {
-        factor = 10./targetdist;
-        weight = factor*exp(-1*(factor-1)*dist);
-}
-else if (targetdist<100 && 10 < targetdist) {
-        factor = 100./targetdist;
-        weight = factor*exp(-.1*(factor-1)*dist);
-}
-
-else if (targetdist<1000 && 100< targetdist) {
-        factor = 1000./targetdist;
-        weight = factor*exp(-.01*(factor-1)*dist);
+if (new_ct<1000 && 1 < new_ct) {
+ 	new_ct /=10.;
+ 	orig_ct /=10.;
+        weight = 1/nomtargetdist*exp(-(orig_ct-new_ct)/(orig_ct*new_ct)*dist);
 }
 else  {
     std::cerr << "Targetdist out of range. Please read insturction for targetdist range for each SigMC sample." <<std::endl;
@@ -133,7 +125,7 @@ void ctau_interpolation(string sample) {
    scalar1.SetPtEtaPhiM(llpPt->at(0),llpEta->at(0),llpPhi->at(0),llpMass->at(0));
    decaydist1 = diff1.Mag()/(scalar1.Gamma()*abs(scalar1.Beta()));
    Decay_dist.push_back(decaydist1);
-   ctau_eventweight *= calculatectauEventWeight(decaydist1,targetdist);
+   ctau_eventweight *= calculatectauEventWeight(decaydist1,properfloat,targetdist);
 
    mother2.SetXYZ(llpvX->at(1),llpvY->at(1),llpvZ->at(1));
    daughter2.SetXYZ(llpDaughtervX->at(3),llpDaughtervY->at(3),llpDaughtervZ->at(3));
@@ -141,7 +133,7 @@ void ctau_interpolation(string sample) {
    scalar2.SetPtEtaPhiM(llpPt->at(1),llpEta->at(1),llpPhi->at(1),llpMass->at(1));
    decaydist2 = diff2.Mag()/(scalar2.Gamma()*abs(scalar2.Beta()));
    Decay_dist.push_back(decaydist2);
-   ctau_eventweight *= calculatectauEventWeight(decaydist2,targetdist);
+   ctau_eventweight *= calculatectauEventWeight(decaydist2,properfloat,targetdist);
 
    newtree->Fill();
    }

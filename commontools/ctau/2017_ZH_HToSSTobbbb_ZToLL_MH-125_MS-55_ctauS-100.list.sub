@@ -14,4 +14,4 @@ request_memory = 200
 request_disk = 1000 MB
 
 Arguments = $(file)
-Queue file from ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-100.list
+Queue file from 2017lists/ZH_HToSSTobbbb_ZToLL_MH-125_MS-55_ctauS-100.list
